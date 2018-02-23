@@ -11,7 +11,7 @@ synth.toMaster();
 synth.triggerAttackRelease("C4", 0.25);
 
 var pattern = new Tone.Pattern(function(time, note){
-  synth.triggerAttackRelease(note, 0.25);
+  synth.triggerAttackRelease(note, '8n');
 }, ['C4', 'E4', 'G4', 'A4']);
 
 pattern.start(0);

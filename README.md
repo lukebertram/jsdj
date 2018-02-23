@@ -10,7 +10,31 @@ JSDJ aims to be a small-scale digital audio workstation (DAW) that will allow us
 
 ## Project Notes
 
-I've wasted a lot of time thinking about how this project is going to look without even knowing if the Tone.js library is capable of offering the kind of controls necessary for the tracker-style interface I've been considering. In this initial phase of the project, it seems more important to dig into Tone.js and see what it can do. Once I understand how to implement it and provide user controls, I'll have a better idea of what controls are even available to include in the UI. Then I can figure out how to lay them out.
+I've spent a lot of time thinking about how this project is going to look without even knowing if the Tone.js library is capable of offering the kind of controls necessary for the tracker-style interface I've been considering. In this initial phase of the project, it seems more important to dig into Tone.js and see what it can do. Once I understand how to implement its features I'll have a better idea of what controls are even available to include in the UI. Then I can figure out how to lay them out.
+
+### ToneJS Notes
+
+#### Transport
+This is the central time-keeper in Tone.js. This is how notes can be played back with a higher amount of precision than something like setTimeout() would allow for. The trigger of every note attack, release, etc is passed as a callback to the Transport along with a `time` argument that tells the Transport when to trigger it.
+
+#### Time
+
+>All methods which take time as an argument accept a String or Number. Time encoded as a Number is assumbed to be seconds and returned. Time encoded as a String can take various forms in order to synchronize it to the Tone.Transport.
+
+Relevant Examples of Time Format:
+
+**Notation**
+Describes time in BPM and time signature relative values.
+* `"4n"` = quarter note
+* `"8t"` = eighth note triplet
+* `"2m"` = two measures
+* `"8n."` = dotted-eighth note
+
+**Transport Time** Tempo and time signature relative time in the form **BARS:QUARTERS:SIXTEENTHS**.
+* `"32:0:0"` = start of the 32nd measure
+* `"4:3:2"` = 4 bars + 3 quarter notes + 2 sixteenth notes.
+* `"1:2"` = 1 bar + 2 quarter notes (sixteenth notes can be omitted)
+
 
 ## Capstone Proposal
 **Name of Student:** Luke Bertram
