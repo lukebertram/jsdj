@@ -12,6 +12,21 @@ JSDJ aims to be a small-scale digital audio workstation (DAW) that will allow us
 
 I've spent a lot of time thinking about how this project is going to look without even knowing if the Tone.js library is capable of offering the kind of controls necessary for the tracker-style interface I've been considering. In this initial phase of the project, it seems more important to dig into Tone.js and see what it can do. Once I understand how to implement its features I'll have a better idea of what controls are even available to include in the UI. Then I can figure out how to lay them out.
 
+### Application Layout
+
+![hand-drawn wireframe](jsdj-wireframe.jpg)
+
+The JSDJ app layout will (eventually) consist of several swappable views inside a single page application. The 3 most important of these views, Song, Chain, and Phrase, are for programming musical sequences of notes.
+
+**Phrase**
+This is the heart of the entire Application, as it is where actual note information is entered into a 16-step timeline representing a single channel. Each of the steps in the timeline represents a sixteenth note subdivision of a measure in 4/4 time, and each individual Phrase timeline represents a single measure.
+
+**Chain**
+The Chain sequencing screen is the next step up from the Phrase sequencer and allows the user to arrange phrases along a 16 measure timeline. It is very much like the Phrase view, but working with user-sequenced phrases instead of notes. The Chain sequencer, like the Phrase sequencer, deals with only one of the several channels that make up the entire song.
+
+**Song**
+The Song sequencing view is the highest-level view of a song's contents and allows for the arranging of successive Chain patterns in all four audio channels at once for up to 256 consecutive Chains. When the play command is issued from this screen, the full song plays including all four channels.
+
 ### ToneJS Notes
 
 #### Transport
@@ -34,6 +49,32 @@ Describes time in BPM and time signature relative values.
 * `"32:0:0"` = start of the 32nd measure
 * `"4:3:2"` = 4 bars + 3 quarter notes + 2 sixteenth notes.
 * `"1:2"` = 1 bar + 2 quarter notes (sixteenth notes can be omitted)
+
+**Quantization**(for potential live input features?) Using the `@` symbol, a Time can be quantized relative to the Transport's grid.
+* `"@1m"` = If the transport is started, this will return the time of the next measure
+
+#### Instruments
+
+All instruments have the same basic methods for triggering the attack and release of the envelopes.
+
+##### `triggerAttack`
+`triggerAttack` takes the note value as the first argument. If no time value is passed in for the second argument, the attack will be triggered immediately. The third argument is the velocity of the attack. The velocity is a value between 0 and 1 which will scale the envelope's attack and sustain values.
+```
+//trigger the start of a note at `time` with a velocity of 50%
+synth.triggerAttack("C4", time, 0.5);
+```
+
+##### `triggerRelease`
+After the attack, the note will stay at the `sustain` level until `triggerRelease` is called.
+```
+//trigger the release portion of the envelope immediately
+synth.triggerRelease();
+
+//trigger the release at `time`
+synth.triggerRelease(time);
+```
+
+#### Polyphony with Tone.PolySynth
 
 
 ## Capstone Proposal
