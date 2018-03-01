@@ -30,27 +30,31 @@ The Song sequencing view is the highest-level view of a song's contents and allo
 ### ToneJS Notes
 
 #### Transport
+
 This is the central time-keeper in Tone.js. This is how notes can be played back with a higher amount of precision than something like setTimeout() would allow for. The trigger of every note attack, release, etc is passed as a callback to the Transport along with a `time` argument that tells the Transport when to trigger it.
 
 #### Time
 
->All methods which take time as an argument accept a String or Number. Time encoded as a Number is assumbed to be seconds and returned. Time encoded as a String can take various forms in order to synchronize it to the Tone.Transport.
+> All methods which take time as an argument accept a String or Number. Time encoded as a number is assumed to be seconds and returned. Time encoded as a String can take various forms in order to synchronize it to the Tone.Transport.
 
 Relevant Examples of Time Format:
 
 **Notation**
 Describes time in BPM and time signature relative values.
+
 * `"4n"` = quarter note
 * `"8t"` = eighth note triplet
 * `"2m"` = two measures
 * `"8n."` = dotted-eighth note
 
 **Transport Time** Tempo and time signature relative time in the form **BARS:QUARTERS:SIXTEENTHS**.
+
 * `"32:0:0"` = start of the 32nd measure
 * `"4:3:2"` = 4 bars + 3 quarter notes + 2 sixteenth notes.
 * `"1:2"` = 1 bar + 2 quarter notes (sixteenth notes can be omitted)
 
 **Quantization**(for potential live input features?) Using the `@` symbol, a Time can be quantized relative to the Transport's grid.
+
 * `"@1m"` = If the transport is started, this will return the time of the next measure
 
 #### Instruments
@@ -58,14 +62,18 @@ Describes time in BPM and time signature relative values.
 All instruments have the same basic methods for triggering the attack and release of the envelopes.
 
 ##### `triggerAttack`
+
 `triggerAttack` takes the note value as the first argument. If no time value is passed in for the second argument, the attack will be triggered immediately. The third argument is the velocity of the attack. The velocity is a value between 0 and 1 which will scale the envelope's attack and sustain values.
+
 ```
 //trigger the start of a note at `time` with a velocity of 50%
 synth.triggerAttack("C4", time, 0.5);
 ```
 
 ##### `triggerRelease`
+
 After the attack, the note will stay at the `sustain` level until `triggerRelease` is called.
+
 ```
 //trigger the release portion of the envelope immediately
 synth.triggerRelease();
@@ -76,8 +84,8 @@ synth.triggerRelease(time);
 
 #### Polyphony with Tone.PolySynth
 
-
 ## Capstone Proposal
+
 **Name of Student:** Luke Bertram
 
 **Name of Project:** JSDJ

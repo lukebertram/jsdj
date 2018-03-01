@@ -117,9 +117,11 @@ all available in monophonic and polyphonic forms
 
 a combination of low-level sound design (at the unit-generator level) and high-level composition happens at the timeline level where events are scheduled and organized.
 
-### JSON Descriptions:
+## JSON Descriptions:
 
-* ex:
+These sorts of JSON-described instruments provide a good way for testing out and dialing in values. These JSON objects can be used in constructors and set methods and provide a simple way to "separate the orchestra from the score."
+
+### Instruments
 
 ```
 var synth = new tone.MonoSynth({
@@ -137,4 +139,25 @@ var synth = new tone.MonoSynth({
 });
 ```
 
-These sorts of JSON-described instruments provide a good way for testing out and dialing in values. These JSON objects can be used in constructors and set methods and provide a simple way to "separate the orchestra from the score."
+### Presets
+
+`synth.setPreset("CoolGuy");`
+
+`chorus.setPreset("rattler");`
+
+### Scores
+
+A JSON-based score format which contains arrays of events with channel names. These channels can then be uniquely routed along with all events that come out of that channel.
+
+```
+Tone.Note.parseScore({
+  "piano" : [["0:0:0", "C3"], ["0:0:2", "E2"], ...],
+  "kick" " ["0:0:0", "0:2:0 + 8t", ...]
+});
+
+Tone.Note.route("piano", function(time, note){
+  //trigger the piano
+});
+```
+
+# Yotam Man has already written a tool that converts midi information into a score JSON object! Find this tool!
