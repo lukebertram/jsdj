@@ -14,7 +14,7 @@ I've spent a lot of time thinking about how this project is going to look withou
 
 ### Application Layout
 
-![hand-drawn wireframe](jsdj-wireframe.jpg)
+![hand-drawn wireframe](./notes/jsdj-wireframe.jpg)
 
 The JSDJ app layout will (eventually) consist of several swappable views inside a single page application. The 3 most important of these views, Song, Chain, and Phrase, are for programming musical sequences of notes.
 
