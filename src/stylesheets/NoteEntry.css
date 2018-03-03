@@ -1,0 +1,26 @@
+.note-entry {
+  width: 100%;
+  background-color: #9bbc0f;
+  padding: 2px;
+  color: #0f380f;
+  display: flex;
+}
+.note-entry div {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.note-entry:nth-child(even) {
+  background-color: #8bac0f;
+}
+
+.note-entry .note-position {
+  flex-grow: 0;
+  width: 1.5em;
+  text-align: right;
+}
+.note-entry .playhead-arrow {
+  flex-grow: 0;
+  width: 1.5em;
+  text-align: center;
+}
