@@ -17,7 +17,7 @@ function MeasureView(props) {
 }
 
 MeasureView.propTypes = {
-  noteArray: PropTypes.arrayOf(PropTypes.Object),
+  noteArray: PropTypes.arrayOf(PropTypes.object),
   playheadPosition: PropTypes.string
 }
 

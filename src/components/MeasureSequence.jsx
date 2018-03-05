@@ -33,7 +33,7 @@ function MeasureSequence(props) {
 }
 
 MeasureSequence.propTypes = {
-  noteArray: PropTypes.arrayOf(PropTypes.Object),
+  noteArray: PropTypes.arrayOf(PropTypes.object),
   playheadPosition: PropTypes.string
 }
 
