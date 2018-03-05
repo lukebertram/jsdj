@@ -1,28 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NoteEntry from './NoteEntry';
+import './../stylesheets/MeasureSequence.css';
 
 function MeasureSequence(props) {
-  const entriesPerMeasure = 16;
-  const notes = [];
-  for (var i = 0; i < entriesPerMeasure; i++) {
-    notes.push({
-      position: i,
-      pitch: 'C4',
-      instrument: null,
-      commandType: null,
-      commandValue: null
-    });
-  }
   return (
     <div>
-      <h3>Measure ID Here</h3>
+      <h3>Measure 01</h3>
       <div className='entry-table-header'>
         <div className='note-position-header'></div>
         <div className='playhead-arrow-header'></div>
-        <div className='pitch-value-header'></div>
-        <div className='instrument-value-header'></div>
-        <div className='command-value-header'></div>
+        <div className='pitch-value-header'>NOTE</div>
+        <div className='instrument-value-header'>INSTR</div>
+        <div className='command-value-header'>CMD</div>
       </div>
       <div className="note-entries">
         {props.noteArray.map((note, index) => (
