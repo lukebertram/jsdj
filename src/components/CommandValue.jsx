@@ -1,7 +1,7 @@
 import React from 'react';
 
 function CommandValue() {
-  return <div>--</div>;
+  return <div>00</div>;
 }
 
 export default CommandValue;

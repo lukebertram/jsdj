@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NoteEntry from './NoteEntry';
 
-function MeasureSequence() {
+function MeasureSequence(props) {
   const entriesPerMeasure = 16;
   const notes = [];
   for (var i = 0; i < entriesPerMeasure; i++) {
@@ -16,10 +17,19 @@ function MeasureSequence() {
   return (
     <div>
       <h3>Measure ID Here</h3>
+      <div className='entry-table-header'>
+        <div className='note-position-header'></div>
+        <div className='playhead-arrow-header'></div>
+        <div className='pitch-value-header'></div>
+        <div className='instrument-value-header'></div>
+        <div className='command-value-header'></div>
+      </div>
       <div className="note-entries">
-        {notes.map((note, index) => (
+        {props.noteArray.map((note, index) => (
           <NoteEntry
-            position={note.position}
+            playheadPosition={props.playheadPosition}
+            time={note.time}
+            position={note.measurePosition}
             pitch={note.pitch}
             instrument={note.instrument}
             commandType={note.commandType}
@@ -30,6 +40,11 @@ function MeasureSequence() {
       </div>
     </div>
   );
+}
+
+MeasureSequence.propTypes = {
+  noteArray: PropTypes.arrayOf(PropTypes.Object),
+  playheadPosition: PropTypes.string
 }
 
 export default MeasureSequence;

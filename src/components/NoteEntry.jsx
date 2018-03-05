@@ -7,11 +7,12 @@ import CommandValue from './CommandValue';
 import './../stylesheets/NoteEntry.css';
 
 function NoteEntry(props) {
+  const playhead = (props.playheadPosition === props.time) ? `\u25B6` : ` `;
   return (
     <div className="note-entry">
       <div className="note-position">{props.position + 1}</div>
-      <div className="playhead-arrow">&#9654;</div>
-      <div className="pitchValue">
+      <div className="playhead-arrow">{playhead}</div>
+      <div className="pitch-value">
         <PitchValue position={props.position} pitch={props.pitch} />
       </div>
       <div className="I-label">I</div>
@@ -30,6 +31,7 @@ function NoteEntry(props) {
 
 NoteEntry.propTypes = {
   position: PropTypes.number,
+  time: PropTypes.string,
   pitch: PropTypes.string,
   instrument: PropTypes.number,
   commandType: PropTypes.string,
