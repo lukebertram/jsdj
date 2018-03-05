@@ -12,7 +12,7 @@ function NoteEntry(props) {
       <div className="note-position">{props.position + 1}</div>
       <div className="playhead-arrow">&#9654;</div>
       <div className="pitchValue">
-        <PitchValue pitch={props.pitch} />
+        <PitchValue position={props.position} pitch={props.pitch} />
       </div>
       <div className="I-label">I</div>
       <div className="instrument-value">

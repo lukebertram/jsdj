@@ -1,6 +1,6 @@
 # JSDJ
 
-#### A browser-based DAW build with Tone.js, React and Redux, February 23rd, 2018
+#### A browser-based DAW (inspired by Johan Kotlinski's [LSDJ](http://www.littlesounddj.com)) built with Tone.js, React and Redux, February 23rd, 2018
 
 #### By **Luke Bertram**
 

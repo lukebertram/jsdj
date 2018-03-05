@@ -7,7 +7,7 @@ function MeasureSequence() {
   for (var i = 0; i < entriesPerMeasure; i++) {
     notes.push({
       position: i,
-      pitch: null,
+      pitch: 'C4',
       instrument: null,
       commandType: null,
       commandValue: null
