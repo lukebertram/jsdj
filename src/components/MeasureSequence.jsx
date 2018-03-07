@@ -17,6 +17,7 @@ function MeasureSequence(props) {
       <div className="note-entries">
         {props.noteArray.map((note, index) => (
           <NoteEntry
+            onPitchValueChange={props.onPitchValueChange}
             playheadPosition={props.playheadPosition}
             time={note.time}
             position={note.measurePosition}
@@ -34,7 +35,9 @@ function MeasureSequence(props) {
 
 MeasureSequence.propTypes = {
   noteArray: PropTypes.arrayOf(PropTypes.object),
-  playheadPosition: PropTypes.string
+  playheadPosition: PropTypes.string,
+  isPlaying: PropTypes.bool,
+  onPitchValueChange: PropTypes.func
 }
 
 export default MeasureSequence;

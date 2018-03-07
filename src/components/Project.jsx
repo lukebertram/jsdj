@@ -9,7 +9,8 @@ class Project extends React.Component {
       isPlaying: false,
       transportBpm: 100,
       currentMeasure: null,
-      playheadPosition: "0:0:0",
+      playheadPosition: null,
+      playheadScheduleId: null,
       measureArray: [
         {"measurePosition" : 0, "time" : "0:0:0", "pitch" : "C3", "velocity": 0.9},
         {"measurePosition" : 1, "time" : "0:0:1", "pitch" : "D3", "velocity": 0.9},
@@ -42,31 +43,48 @@ class Project extends React.Component {
     	synth.triggerAttackRelease(value.pitch, "16n", time, value.velocity);
     }, this.state.measureArray.filter((note) => note.pitch)
     ).start("0:0:0");
-    console.log(this.state.measureArray);
+    // console.log(this.state.measureArray);
 
     this.handleStartMeasurePlayback = this.handleStartMeasurePlayback.bind(this);
     this.handleStopMeasurePlayback = this.handleStopMeasurePlayback.bind(this);
+    this.handlePitchValueChange = this.handlePitchValueChange.bind(this);
   }
 
-  // componentDidMount(){
-  //   setInterval(function(){ this.setState({playheadPosition: this.transport.position});}, 500);
-  // }
+  handlePitchValueChange(newPitch, notePosition){
+    console.log(`newPitch: ${newPitch}`);
+    console.log(`notePosition: ${notePosition}`);
+    const newMeasureArray = this.state.measureArray.slice();
+    newMeasureArray[notePosition].pitch = newPitch;
+
+    this.setState({ measureArray: newMeasureArray });
+  }
 
   handleStartMeasurePlayback(){
-    console.log(`Start playback pressed`);
-    this.transport.scheduleRepeat(()=>{ this.setState({ playheadPosition: this.transport.position })}, "16n");
+    // console.log(`Start playback pressed`);
+
+    //set playhead to update position with every 16th note
+    const playheadSchedule = this.transport.scheduleRepeat(()=> {
+      this.setState({ playheadPosition: this.transport.position });
+      // console.log(`scheduleRepeat for playheadPosition is still running!`);
+    }, "16n");
     this.transport.start("+0.1", "0:0:0");
-    this.setState({isPlaying: true});
-    setTimeout(()=>{console.log(`State of isPlaying: ${this.state.isPlaying}`)}, 100);
-    // setInterval( () => { this.setState({ playheadPosition: this.transport.position })}, 100);
-    setInterval( () => { console.log(`Playhead Position in state: ${this.state.playheadPosition}`)}, 100);
+    this.setState({
+      isPlaying: true,
+      playheadScheduleId: playheadSchedule
+    });
+    // setTimeout(()=>{console.log(`State of isPlaying: ${this.state.isPlaying}`)}, 0);
   };
 
   handleStopMeasurePlayback(){
     console.log(`Stop playback pressed`);
     this.transport.stop();
-    this.setState({isPlaying: false});
-    setTimeout(()=>{console.log(`State of isPlaying: ${this.state.isPlaying}`)}, 100);
+    this.transport.clear(this.state.playheadScheduleId);
+    this.setState({
+      isPlaying: false,
+      playheadPosition: null,
+      playheadScheduleId: null
+    });
+    // setTimeout(()=>{console.log(`State of isPlaying: ${this.state.isPlaying}`)}, 0);
   }
 
   render(){
@@ -76,7 +94,11 @@ class Project extends React.Component {
         <button onClick={this.handleStopMeasurePlayback}>Temporary<br/>Playback<br/>Stop</button>
         <MeasureView
           playheadPosition={this.state.playheadPosition}
-          noteArray={this.state.measureArray}/>
+          noteArray={this.state.measureArray}
+          onStartMeasurePlayback={this.handleStartMeasurePlayback}
+          onStopMeasurePlayback={this.handleStopMeasurePlayback}
+          onPitchValueChange={this.handlePitchValueChange}
+          isPlaying={this.state.isPlaying}/>
       </div>
     );
   }

@@ -10,15 +10,24 @@ function MeasureView(props) {
     <div className="measure-view-container">
       <MeasureSequence
         playheadPosition={props.playheadPosition}
-        noteArray={props.noteArray}/>
-      <ControlBar />
+        noteArray={props.noteArray}
+        onPitchValueChange={props.onPitchValueChange}
+        isPlaying={props.isPlaying}/>
+      <ControlBar
+        onStartMeasurePlayback={props.onStartMeasurePlayback}
+        onStopMeasurePlayback={props.onStopMeasurePlayback}
+        isPlaying={props.isPlaying}/>
     </div>
   );
 }
 
 MeasureView.propTypes = {
   noteArray: PropTypes.arrayOf(PropTypes.object),
-  playheadPosition: PropTypes.string
+  playheadPosition: PropTypes.string,
+  isPlaying: PropTypes.bool,
+  onStartMeasurePlayback: PropTypes.func,
+  onStopMeasurePlayback: PropTypes.func,
+  onPitchValueChange: PropTypes.func
 }
 
 export default MeasureView;

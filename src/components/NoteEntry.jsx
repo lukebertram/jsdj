@@ -13,7 +13,10 @@ function NoteEntry(props) {
       <div className="note-position">{props.position + 1}</div>
       <div className="playhead-arrow">{playhead}</div>
       <div className="pitch-value">
-        <PitchValue position={props.position} pitch={props.pitch} />
+        <PitchValue
+          position={props.position}
+          pitch={props.pitch}
+          onPitchValueChange={props.onPitchValueChange}/>
       </div>
       <div className="I-label">I</div>
       <div className="instrument-value">
@@ -35,7 +38,8 @@ NoteEntry.propTypes = {
   pitch: PropTypes.string,
   instrument: PropTypes.number,
   commandType: PropTypes.string,
-  commandValue: PropTypes.number
+  commandValue: PropTypes.number,
+  onPitchValueChange: PropTypes.func
 };
 
 export default NoteEntry;
