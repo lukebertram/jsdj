@@ -51,8 +51,8 @@ class Project extends React.Component {
   }
 
   handlePitchValueChange(newPitch, notePosition){
-    console.log(`newPitch: ${newPitch}`);
-    console.log(`notePosition: ${notePosition}`);
+    console.log(`newPitch: `, newPitch);
+    console.log(`notePosition: `, notePosition);
     const newMeasureArray = this.state.measureArray.slice();
     newMeasureArray[notePosition].pitch = newPitch;
 

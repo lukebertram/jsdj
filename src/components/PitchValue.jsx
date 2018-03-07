@@ -1,20 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 function PitchValue(props) {
   const selectedOption = { value: props.pitch, label: props.pitch };
   const value = selectedOption && selectedOption.value;
+  // const options = enumerables.map(e => ({
+  //   value: e,
+  //   label: e
+  // }));
   // const pitch = props.pitch ? props.pitch : '---';
-  console.log(value);
+  // console.log(value);
   return (
     <Select
-      type='text'
+      type="text"
       value={value}
-      onChange={(selectedValueOrValues) => {props.onPitchValueChange(selectedOption.value, props.position)}}
-      placeholder='---'
-      clearable={false}
+      onChange={newPitch => {
+        props.onPitchValueChange(newPitch.value, props.position);
+      }}
+      autosize={true}
+      searchable
       arrowRenderer={null}
+      placeholder="---"
+      clearable={false}
+
       options={[
         { value: 'C2', label: 'C2' },
         { value: 'C#2', label: 'C#2' },
@@ -99,8 +109,9 @@ function PitchValue(props) {
         { value: 'G#8', label: 'G#8' },
         { value: 'A8', label: 'A8' },
         { value: 'A#8', label: 'A#8' },
-        { value: 'B8', label: 'B8' },
-      ]}/>
+        { value: 'B8', label: 'B8' }
+      ]}
+    />
   );
 }
 
@@ -108,5 +119,5 @@ PitchValue.propTypes = {
   position: PropTypes.number,
   pitch: PropTypes.string,
   onPitchValueChange: PropTypes.func
-}
+};
 export default PitchValue;
