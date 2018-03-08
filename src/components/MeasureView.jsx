@@ -14,8 +14,11 @@ function MeasureView(props) {
         onPitchValueChange={props.onPitchValueChange}
         isPlaying={props.isPlaying}/>
       <ControlBar
+        currentBPM={props.currentBPM}
         onStartMeasurePlayback={props.onStartMeasurePlayback}
         onStopMeasurePlayback={props.onStopMeasurePlayback}
+        onIncrementBPM={props.onIncrementBPM}
+        onDecrementBPM={props.onDecrementBPM}
         isPlaying={props.isPlaying}/>
     </div>
   );

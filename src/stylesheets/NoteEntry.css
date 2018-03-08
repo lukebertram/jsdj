@@ -21,12 +21,18 @@ div {
   flex-grow: 0;
   width: 1.5em;
   text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .note-entry .playhead-arrow {
   flex-grow: 0;
   width: 3em;
-  font-size: .8em;
+  font-size: 1em;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .pitch-value {
@@ -36,11 +42,28 @@ div {
 }
 .I-label {
   background: #8bac0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30px;
 }
 .instrument-value {
   margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .command-type {
   background: #8bac0f;
+  max-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.command-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

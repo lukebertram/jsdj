@@ -1,0 +1,40 @@
+.BPM-adjust-container {
+  flex-grow: 0;
+  display: flex;
+  justify-content: space-between;
+  height:80px;
+  margin: 10px 0px;
+  width: 125px;
+  align-items: center;
+  background-color: #9bbc0f;
+  border: 2px solid #306230;
+  border-radius: 5px;
+}
+
+.BPM-adjust-display {
+  font-size: 2.5em;
+}
+
+.BPM-adjust-buttons {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 30px;
+  padding: 7px 0;
+  box-sizing: border-box;
+}
+
+.BPM-button {
+  height: 27px;
+  width: 40px;
+  background-color: #0f380f;
+  color: #9bbc0f;
+  border: 2px solid #306230;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: EditUndo;
+  text-align: center;
+  padding: 2px 0;
+}

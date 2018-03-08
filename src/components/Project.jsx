@@ -30,24 +30,38 @@ class Project extends React.Component {
         {"measurePosition" : 15, "time" : "0:3:3", "pitch" : "G6", "velocity": 0.9}
       ],
     };
-    this.transport = Tone.Transport;
-    this.transport.bpm.value = this.state.transportBpm;
-    this.transport.setLoopPoints("0:0:0", "1:0:0");
-    this.transport.loop = true;
+    // this.transport = Tone.Transport;
+    Tone.Transport.bpm.value = this.state.transportBpm;
+    console.log('TONE.TRANSPORT.BPM.VALUE', Tone.Transport.bpm.value);
+    Tone.Transport.loop = true;
+    Tone.Transport.setLoopPoints("0:0:0", "1:0:0");
+    //
+    // this.basicSynth = new Tone.Synth();
+    // this.basicSynth.toMaster();
 
     //this.harpPart0 =
-    new Tone.Part(function(time, value) {
-    	//the value is an object which contains both the note and the velocity
-      const synth = new Tone.Synth();
-      synth.toMaster();
-    	synth.triggerAttackRelease(value.pitch, "16n", time, value.velocity);
-    }, this.state.measureArray.filter((note) => note.pitch)
-    ).start("0:0:0");
+    // new Tone.Part(function(time, value) {
+    // 	//the value is an object which contains both the note and the velocity
+    //   const synth = new Tone.Synth();
+    //   synth.toMaster();
+    // 	synth.triggerAttackRelease(value.pitch, "16n", time, value.velocity);
+    // }, this.state.measureArray.filter((note) => note.pitch)
+    // ).start("0:0:0");
     // console.log(this.state.measureArray);
+
 
     this.handleStartMeasurePlayback = this.handleStartMeasurePlayback.bind(this);
     this.handleStopMeasurePlayback = this.handleStopMeasurePlayback.bind(this);
     this.handlePitchValueChange = this.handlePitchValueChange.bind(this);
+    this.handleIncrementBPM = this.handleIncrementBPM.bind(this);
+    this.handleDecrementBPM = this.handleDecrementBPM.bind(this);
+  }
+
+  componentDidMount(){
+    console.log('PROJECT MOUNTED');
+    console.log('TONE.TRANSPORT.BPM.VALUE 2', Tone.Transport.bpm.value);
+
+
   }
 
   handlePitchValueChange(newPitch, notePosition){
@@ -61,24 +75,24 @@ class Project extends React.Component {
 
   handleStartMeasurePlayback(){
     // console.log(`Start playback pressed`);
-
-    //set playhead to update position with every 16th note
-    const playheadSchedule = this.transport.scheduleRepeat(()=> {
-      this.setState({ playheadPosition: this.transport.position });
+    this.scheduleMeasure(this.state.measureArray);
+    // set playhead to update position with every 16th note
+    const playheadSchedule = Tone.Transport.scheduleRepeat(()=> {
+      this.setState({ playheadPosition: Tone.Transport.position });
       // console.log(`scheduleRepeat for playheadPosition is still running!`);
     }, "16n");
-    this.transport.start("+0.1", "0:0:0");
+    Tone.Transport.start("+0.1", "0:0:0");
     this.setState({
       isPlaying: true,
       playheadScheduleId: playheadSchedule
     });
-    // setTimeout(()=>{console.log(`State of isPlaying: ${this.state.isPlaying}`)}, 0);
+    setTimeout(()=>{console.log(`State of isPlaying: ${this.state.isPlaying}`)}, 0);
   };
 
   handleStopMeasurePlayback(){
     console.log(`Stop playback pressed`);
-    this.transport.stop();
-    this.transport.clear(this.state.playheadScheduleId);
+    Tone.Transport.stop();
+    Tone.Transport.clear(this.state.playheadScheduleId);
     this.setState({
       isPlaying: false,
       playheadPosition: null,
@@ -87,17 +101,42 @@ class Project extends React.Component {
     // setTimeout(()=>{console.log(`State of isPlaying: ${this.state.isPlaying}`)}, 0);
   }
 
+  handleIncrementBPM(){
+    console.log(`BPM increment pressed`);
+    const newBpm = this.state.transportBpm + 1;
+    Tone.Transport.bpm.value = newBpm;
+    this.setState({transportBpm: newBpm});
+  }
+
+  handleDecrementBPM(){
+    console.log(`BPM decrement pressed`);
+    const newBpm = this.state.transportBpm - 1;
+    Tone.Transport.bpm.value = newBpm;
+    this.setState({transportBpm: newBpm});
+  }
+
+  scheduleMeasure(noteArray){
+    new Tone.Part(function(time, value) {
+    	//the value is an object which contains both the note and the velocity
+      const synth = new Tone.Synth();
+      synth.toMaster();
+    	synth.triggerAttackRelease(value.pitch, "16n", time, value.velocity);
+    }, noteArray.filter((note) => note.pitch)
+    ).start("0:0:0");
+  }
+
   render(){
     return (
       <div>
-        <button onClick={this.handleStartMeasurePlayback}>Temporary<br/>Playback<br/>Start</button>
-        <button onClick={this.handleStopMeasurePlayback}>Temporary<br/>Playback<br/>Stop</button>
         <MeasureView
           playheadPosition={this.state.playheadPosition}
+          currentBPM={this.state.transportBpm}
           noteArray={this.state.measureArray}
           onStartMeasurePlayback={this.handleStartMeasurePlayback}
           onStopMeasurePlayback={this.handleStopMeasurePlayback}
           onPitchValueChange={this.handlePitchValueChange}
+          onIncrementBPM={this.handleIncrementBPM}
+          onDecrementBPM={this.handleDecrementBPM}
           isPlaying={this.state.isPlaying}/>
       </div>
     );

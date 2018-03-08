@@ -5,7 +5,7 @@ import './../stylesheets/MeasureSequence.css';
 
 function MeasureSequence(props) {
   return (
-    <div>
+    <div className='measure-sequence-container'>
       <h3>Measure 01</h3>
       <div className='entry-table-header'>
         <div className='note-position-header'></div>
