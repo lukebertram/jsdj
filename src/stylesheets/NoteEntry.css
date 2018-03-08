@@ -6,7 +6,7 @@
   display: flex;
   border: 1px solid #8bac0f;
 }
-.note-entry div {
+div {
   padding: 2px;
   flex-grow: 1;
   text-align: center;
@@ -30,6 +30,7 @@
 }
 
 .pitch-value {
+  padding: 0;
   /* margin-right: 15px; */
   /*width: 2.5em;*/
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import './../stylesheets/PitchValue.css';
 
 function PitchValue(props) {
   const selectedOption = { value: props.pitch, label: props.pitch };
