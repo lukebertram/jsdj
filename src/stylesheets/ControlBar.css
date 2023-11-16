@@ -1,0 +1,24 @@
+.control-bar-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 950px;
+  max-width: 200px;
+  border-radius: 15px;
+  background-color: #8bac0f;
+  color: #0f380f;
+  margin: 75px 40px 40px;
+}
+
+.toggle-play-btn {
+  background-color: #0f380f;
+  color: #9bbc0f;
+  border: 2px solid #306230;
+  border-radius: 5px;
+  font-size: 2em;
+  font-family: EditUndo;
+  text-align: center;
+  padding: 5px;
+  margin-bottom: 20px;
+}

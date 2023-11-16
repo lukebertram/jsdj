@@ -1,0 +1,9 @@
+.measure-view-container {
+  display: flex;
+  justify-content: space-around;
+  max-width: 950px;
+  max-height: 950px;
+  margin: auto;
+  background-color: #9bbc0f;
+  color: #0f380f;
+}

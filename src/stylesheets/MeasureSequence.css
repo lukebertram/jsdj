@@ -1,0 +1,42 @@
+.measure-sequence-container {
+  margin-left: 40px;
+}
+
+.entry-table-header {
+  width: 100%;
+  background-color: #9bbc0f;
+  padding: 0px;
+  color: #0f380f;
+  display: flex;
+}
+.entry-table-header div {
+  padding: 2px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.entry-table-header .note-position-header {
+  flex-grow: 0;
+  width: 1.5em;
+  text-align: right;
+}
+.entry-table-header .playhead-arrow-header {
+  flex-grow: 0;
+  width: 3em;
+  font-size: .8em;
+  text-align: center;
+}
+
+.pitch-value-header {
+  margin-right: 15px;
+  width: 2.5em;
+}
+.I-label {
+  background: #8bac0f;
+}
+.instrument-value-header{
+  margin-right: 15px;
+}
+
+.command-value-header {
+}
